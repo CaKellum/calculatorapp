@@ -1,16 +1,14 @@
 # flutter_calculator
+> by Christopher Kellum
 
-A new Flutter project.
+## Functionality
+* it is a calculator 
+* it will do basic operations by may
 
-## Getting Started
+## Dev Environment
+* I'm on windows machine though tested on linux it does work
+* all the screen shots are done on emulator
+* ide will be intelliJ idea and VisualStudioCode
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### Contribution
+> please dont until 1.0 release but after that then i will welcome any and all of them 
