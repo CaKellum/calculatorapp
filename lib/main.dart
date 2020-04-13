@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_calculator/logic/operation_parsing.dart';
 
 void main() => runApp(MyApp());
 
@@ -21,13 +22,14 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  String function = ' ';
+  String function = '';
+  bool erase = false;
 
   Expanded calcButton(String text) {
     return Expanded(
       child: FlatButton(
         color: Colors.black45,
-        padding: EdgeInsets.all(15),
+        padding: EdgeInsets.all(20),
         child: Text(
           text,
           style: TextStyle(
@@ -36,7 +38,13 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ),
         onPressed: () {
-          this.function += text;
+          setState(() {
+            if(erase){
+              this.function ='';
+              this.erase = false;
+            }
+            this.function += text;
+          });
         },
       ),
     );
@@ -46,7 +54,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Expanded(
       child: FlatButton(
         color: Colors.black45,
-        padding: EdgeInsets.all(15),
+        padding: EdgeInsets.all(20),
         child: Text(
           '=',
           style: TextStyle(
@@ -55,8 +63,10 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ),
         onPressed: () {
-
-          this.function = '';
+          setState(() {
+            this.function = OperationParsing.operate(this.function);
+          });
+          this.erase = true;
         },
       ),
     );

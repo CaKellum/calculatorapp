@@ -2,26 +2,27 @@
 this is is where the input will be parsed in to a operation tree
 */
 class OperationParsing {
-  static Map<String, String> operators = {r'/': (_list[0]/_list[1]).toString(), r'X': (_list[0]*_list[1]).toString(), r'-': (_list[0]-_list[1]).toString(), r'+': (_list[0]+_list[1]).toString()};
-  static List<double> _list = new List(2);
-
-  static void _getNumber(String number){
+  static double _getNumber(String number) {
     double nummer;
-    try{
-      nummer = double.parse(number);
-    }catch(e){
-      throw new Exception('expected number');
+    try {
+      nummer = double.tryParse(number);
+    } catch (e) {
+      throw new Exception('expected number got' + e.toString());
     }
-    _list.add(nummer);
+    return nummer;
   }
 
-  static String operate(String operation){
-    var opArr = operation.split(' ');
-    _getNumber(opArr[0]);
-    _getNumber(opArr[2]);
-    String retString = operators[opArr[1]];
-    _list.clear();
-    return retString;
+  static String operate(String operation) {
+    List<String> opArr = operation.split(' ');
+    double x = _getNumber(opArr[0]);
+    double y = _getNumber(opArr[2]);
+    Map<String, double> operators = {
+      r'/': (x / y),
+      r'X': (x * y),
+      r'-': (x - y),
+      r'+': (x + y),
+    };
+    double n = operators[opArr[1]];
+    return n.toStringAsFixed(n.truncateToDouble() == n ? 0 : 2);
   }
-
 }
