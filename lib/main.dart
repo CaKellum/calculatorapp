@@ -6,58 +6,108 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Calculator',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.deepPurple,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MyHomePage(),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-  final String title;
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  String function = ' ';
 
-  void _incrementCounter() {
-    setState(() {
+  Expanded calcButton(String text) {
+    return Expanded(
+      child: FlatButton(
+        color: Colors.black45,
+        padding: EdgeInsets.all(15),
+        child: Text(
+          text,
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 40,
+          ),
+        ),
+        onPressed: () {
+          this.function += text;
+        },
+      ),
+    );
+  }
 
-      _counter++;
-    });
+  Expanded eqButton() {
+    return Expanded(
+      child: FlatButton(
+        color: Colors.black45,
+        padding: EdgeInsets.all(15),
+        child: Text(
+          '=',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 40,
+          ),
+        ),
+        onPressed: () {
+          print(this.function);
+          this.function = '';
+        },
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
-      appBar: AppBar(
-
-        title: Text(widget.title),
-      ),
-      body: Center(
+      body: SafeArea(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
+            SizedBox(
+              child: Text(this.function),
+              width: MediaQuery.of(context).size.width,
+              height: 200,
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.display1,
+            Row(
+              children: <Widget>[
+                calcButton('7'),
+                calcButton('8'),
+                calcButton('9'),
+                calcButton(' \\ '),
+              ],
+            ),
+            Row(
+              children: <Widget>[
+                calcButton('4'),
+                calcButton('5'),
+                calcButton('6'),
+                calcButton(' X '),
+              ],
+            ),
+            Row(
+              children: <Widget>[
+                calcButton('1'),
+                calcButton('2'),
+                calcButton('3'),
+                calcButton(' - '),
+              ],
+            ),
+            Row(
+              children: <Widget>[
+                calcButton('0'),
+                calcButton('.'),
+                eqButton(),
+                calcButton(' + '),
+              ],
             ),
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ));
+    );
   }
 }
