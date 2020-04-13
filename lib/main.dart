@@ -78,7 +78,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 calcButton('7'),
                 calcButton('8'),
                 calcButton('9'),
-                calcButton(' \\ '),
+                calcButton(' / '),
               ],
             ),
             Row(

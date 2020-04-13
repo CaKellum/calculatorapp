@@ -2,20 +2,24 @@
 this is is where the input will be parsed in to a operation tree
 */
 class OperationParsing {
-  final String operationString;
-  final List<String> operators = [r'\', r'X', r'-', r'+'];
+  static Map<String, String> operators = {r'/': (_list[0]/_list[1]).toString(), r'X': (_list[0]*_list[1]).toString(), r'-': (_list[0]-_list[1]).toString(), r'+': (_list[0]+_list[1]).toString()};
+  static List<double> _list = new List(2);
 
-
-  OperationParsing(this.operationString);
-
-  OperationTree toTree(){
-    OperationTree tree = new OperationTree();
-    List<String> operationArray = getOpArray();
-    return tree;
+  static void _getNumber(String number){
+    double nummer;
+    try{
+      nummer = double.parse(number);
+    }catch(e){
+      throw new Exception('expected number');
+    }
+    _list.add(nummer);
   }
 
-  List<String> getOpArray() {
-    return operationString.split(r' ');
+  static String operate(String operation){
+    var opArr = operation.split(' ');
+    _getNumber(opArr[0]);
+    _getNumber(opArr[2]);
+    return operators[opArr[1]];
   }
 
 }
