@@ -55,7 +55,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ),
         onPressed: () {
-          print(this.function);
+
           this.function = '';
         },
       ),

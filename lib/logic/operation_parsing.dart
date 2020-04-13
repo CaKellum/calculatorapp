@@ -19,7 +19,9 @@ class OperationParsing {
     var opArr = operation.split(' ');
     _getNumber(opArr[0]);
     _getNumber(opArr[2]);
-    return operators[opArr[1]];
+    String retString = operators[opArr[1]];
+    _list.clear();
+    return retString;
   }
 
 }
